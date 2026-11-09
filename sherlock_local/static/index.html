@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4f3ee"><title>Sherlock Local · Kullanıcı adı arama</title><link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="Sherlock Local ana sayfa"><span class="brand-icon">s.</span><span>sherlock<span class="brand-local">LOCAL</span></span></a>
+  <div class="workspace-label">ÇALIŞMA ALANI</div>
+  <a class="nav active" href="/">⌕ <span>Kullanıcı adı ara</span><span class="nav-dot"></span></a>
+  <div class="sidebar-note"><span class="note-symbol">↗</span><strong>Açık kaynak gücü.<br>Yerel çalışma alanın.</strong><p>Sherlock motoruyla herkese açık profilleri tek bir yerden keşfet.</p><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener noreferrer">Sherlock projesi ↗</a></div>
+  <div class="local-status"><span class="dot"></span> Bu bilgisayarda çalışıyor<span>127.0.0.1 · v0.1.0</span></div>
+</aside>
+<main>
+  <header class="topbar"><span>Çalışma alanı <span class="breadcrumb">/</span> <b>Kullanıcı adı arama</b></span><span class="private-badge"><span class="dot"></span> Yerel oturum</span></header>
+  <div class="content">
+    <div class="page-heading"><div><div class="eyebrow">DİJİTAL İZLERİ KEŞFET</div><h1>Bir kullanıcı adı.<br><span>Birçok olasılık.</span></h1><p>Bir kullanıcı adının hangi platformlarda kullanıldığını araştır.</p></div><div class="heading-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="art-at">@</span><span class="art-point p1"></span><span class="art-point p2"></span><span class="art-point p3"></span></div></div>
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="panel-title"><h2 id="search-title">Yeni arama</h2><span class="engine-badge">POWERED BY SHERLOCK</span></div>
+      <form id="search-form">
+        <label for="username">Kullanıcı adı</label>
+        <div class="search-row"><div class="username-wrap"><span aria-hidden="true">@</span><input id="username" name="username" placeholder="Aramak istediğin kullanıcı adı" maxlength="64" autocomplete="off" spellcheck="false" required><kbd>↵</kbd></div><button class="primary" id="search-button" type="submit"><span>⌕</span> Aramayı başlat <span>↗</span></button><button id="cancel-button" class="secondary" type="button" hidden>Durdur</button></div>
+        <div class="search-options"><span class="help">Profil bağlantısı yerine yalnızca kullanıcı adını yaz.</span><label for="timeout">İstek süresi <select id="timeout"><option value="10">10 saniye</option><option value="15" selected>15 saniye</option><option value="30">30 saniye</option><option value="60">60 saniye</option></select></label></div>
+        <div class="platform-heading"><span>Aranacak platformlar <span id="platform-count" class="count">…</span></span><button class="text-button" type="button" id="toggle-platforms" aria-expanded="false">Platformları seç <span>⌄</span></button></div>
+        <div class="presets" role="group" aria-label="Platform grupları"><button type="button" class="preset selected" data-preset="popular">✦ Popüler platformlar</button><button type="button" class="preset" data-preset="all">◎ Tüm platformlar</button><span id="selection-note">Platformlar yükleniyor…</span></div>
+        <div id="platform-picker" hidden><label class="sr-only" for="platform-filter">Platform ara</label><input id="platform-filter" class="platform-filter" placeholder="Platform adıyla filtrele…"><div class="platform-list" id="platform-list"></div></div>
+      </form>
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+    <section class="results-section" aria-labelledby="results-title">
+      <div class="results-heading"><div><h2 id="results-title">Arama sonuçları <span id="result-count" class="count">0</span></h2><p id="result-subtitle">İlk aramanla dijital izleri keşfetmeye başla.</p></div><button id="export-button" class="secondary" disabled>↓ CSV indir</button></div>
+      <div id="progress-area" class="progress-area" hidden><div><span id="progress-label" role="status" aria-live="polite">Arama başlatılıyor…</span><span id="progress-count"></span></div><progress id="progress" value="0" max="1" aria-label="Arama ilerlemesi"></progress></div>
+      <div id="results-toolbar" class="results-toolbar" hidden><div class="tabs" role="group" aria-label="Sonuç filtresi"><button class="tab selected" data-filter="all">Tümü <span id="count-all">0</span></button><button class="tab" data-filter="found">Bulundu <span id="count-found">0</span></button><button class="tab" data-filter="absent">Bulunamadı <span id="count-absent">0</span></button><button class="tab" data-filter="unknown">Kontrol edilemedi <span id="count-unknown">0</span></button></div><label class="sr-only" for="result-filter">Sonuçlarda ara</label><input id="result-filter" placeholder="Sonuçlarda ara…"></div>
+      <div id="empty-state" class="empty-state"><div class="empty-icon" aria-hidden="true">⌕<span>+</span></div><h3>Her keşif bir isimle başlar.</h3><p>Yukarıya bir kullanıcı adı yaz; bulunan profiller,<br>bağlantılar ve kontrol durumları burada görünsün.</p><div class="empty-steps"><span><b>01</b> Kullanıcı adı gir</span><span class="step-line"></span><span><b>02</b> Platformları seç</span><span class="step-line"></span><span><b>03</b> İzleri keşfet</span></div></div>
+      <div id="table-wrap" class="table-wrap" hidden><table><thead><tr><th>PLATFORM</th><th>DURUM</th><th>PROFİL BAĞLANTISI</th><th>SÜRE</th><th></th></tr></thead><tbody id="results-body"></tbody></table><p id="no-matches" hidden>Bu filtreye uygun sonuç yok.</p></div>
+    </section>
+    <footer><span><span class="footer-symbol">ⓘ</span> Aynı kullanıcı adı, aynı kişi anlamına gelmez. Sonuçları kaynak platformda doğrula.</span><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener noreferrer">Sherlock açık kaynak projesi ↗</a></footer>
+  </div>
+</main>
+</body></html>
